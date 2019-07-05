@@ -76,24 +76,20 @@ export class CalendarComponent implements OnInit {
   }
 
   setDate(what: string, when): void {
-    let dateObject = Object.assign({}, this.dateObj);
-
     switch (what) {
       case 'SET_YEAR': {
-        dateObject = moment(dateObject).set('year', when);
+        this.dateObj = moment(this.dateObj).set('year', when);
         break;
       }
       case 'SET_MONTH': {
-        dateObject = moment(dateObject).set('month', when);
+        this.dateObj = moment(this.dateObj).set('month', when);
         break;
       }
       case 'SET_DAY': {
-        dateObject = moment(dateObject).set('date', when);
+        this.dateObj = moment(this.dateObj).set('date', when);
         break;
       }
     }
-
-    this.dateObj = dateObject;
     this.setCalendar();
   }
 }
