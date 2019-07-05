@@ -14,8 +14,4 @@ export class MonthsComponent {
 
   @Output()
   setMonth = new EventEmitter<string>();
-
-  changeMonth(action: string): void {
-    this.setMonth.emit(action);
-  }
 }

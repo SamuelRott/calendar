@@ -17,8 +17,4 @@ export class DaysComponent {
 
   @Output()
   setDay = new EventEmitter<string>();
-
-  changeDay(day: string) {
-    this.setDay.emit(day);
-  }
 }

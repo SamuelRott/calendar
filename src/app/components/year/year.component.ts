@@ -13,6 +13,14 @@ export class YearComponent {
   setYear = new EventEmitter<string>();
 
   changeYear(action: string): void {
-    this.setYear.emit(action);
+
+    let selectedYear;
+    if (action === 'PREVIOUS') {
+      selectedYear =  Number(this.currentYear) - 1;
+    } else if (action === 'NEXT') {
+      selectedYear =  Number(this.currentYear) + 1;
+    }
+
+    this.setYear.emit(selectedYear);
   }
 }

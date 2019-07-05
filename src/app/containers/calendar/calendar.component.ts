@@ -35,7 +35,7 @@ export class CalendarComponent implements OnInit {
     this.currentMonth = this.dateObj.format('MMM');
     this.currentDay = this.dateObj.format('D');
     this.currentDayName = this.dateObj.format('dddd');
-    this.currentYear = this.dateObj.format('Y');
+    this.currentYear = this.dateObj.format('YYYY');
     this.daysInMonth();
     this.blankDays = new Array(Number(this.firstDayOfMonth()));
     this.totalSlots = [...this.blankDays, ...this.days];
@@ -83,21 +83,14 @@ export class CalendarComponent implements OnInit {
     this.setCalendar();
   }
 
-  setYear(action: string): void {
-    let selectedYear;
-    if (action === 'PREVIOUS') {
-      selectedYear =  Number(this.currentYear) - 1;
-    } else {
-      selectedYear =  Number(this.currentYear) + 1;
-    }
-
+  setYear(year: number): void {
     let dateObject = Object.assign({}, this.dateObj);
-    dateObject = moment(dateObject).set('year', selectedYear);
+    dateObject = moment(dateObject).set('year', year);
     this.dateObj = dateObject;
     this.setCalendar();
   }
 
-  setDay(day): void {
+  setDay(day: number): void {
     let dateObject = Object.assign({}, this.dateObj);
     dateObject = moment(dateObject).set('date', day);
     this.dateObj = dateObject;

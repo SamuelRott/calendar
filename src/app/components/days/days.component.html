@@ -8,7 +8,9 @@
   </thead>
   <tbody>
   <tr *ngFor="let week of rows">
-    <td  *ngFor="let day of week" [class.current-day]="currentDay === day" (click)="changeDay(day)"> {{day}}</td>
+    <td  *ngFor="let day of week"
+         [class.current-day]="currentDay === day"
+         (click)="setDay.emit(day)">{{day}}</td>
   </tr>
   </tbody>
 </table>
