@@ -10,7 +10,7 @@ export class YearComponent {
   currentYear: string;
 
   @Output()
-  setYear = new EventEmitter<string>();
+  setYear = new EventEmitter<number>();
 
   changeYear(action: string): void {
 

@@ -16,5 +16,5 @@ export class DaysComponent {
   weekDayShort: string[];
 
   @Output()
-  setDay = new EventEmitter<string>();
+  setDay = new EventEmitter<number>();
 }
