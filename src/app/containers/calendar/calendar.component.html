@@ -1,8 +1,8 @@
 <div>
-  <button (click)="setYear('PREVIOUS')">previous</button><span >{{year}}</span><button (click)="setYear('NEXT')">next</button>
+  <button (click)="setYear('PREVIOUS')" type="button">previous</button><span >{{year}}</span><button (click)="setYear('NEXT')" type="button">next</button>
 </div>
 <div>
-  <span *ngFor="let month of allMonths" (click)="setMonth(month)" [class.current-month]="currentMonth === month">{{month}}</span>
+  <button *ngFor="let month of allMonths" (click)="setMonth(month)" [class.current-month]="currentMonth === month" type="button">{{month}}</button>
 </div>
 <table className="calendar-day">
   <thead>

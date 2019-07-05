@@ -21,17 +21,13 @@ export class CalendarComponent implements OnInit {
   cells: any[] = [];
 
   constructor() {
-
+    this.dateObj = moment();
+    this.weekDayShort = moment.weekdaysShort();
+    this.allMonths = moment.monthsShort();
   }
 
   ngOnInit() {
-    this.weekDayShort = moment.weekdaysShort();
-    this.dateObj = moment();
-    this.allMonths = moment.monthsShort();
     this.currentDay = this.dateObj.format('D');
-
-    // not in use yet
-
     this.setCalendar();
   }
 
