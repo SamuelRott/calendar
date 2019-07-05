@@ -1,0 +1,20 @@
+<div>
+  <button (click)="setYear('PREVIOUS')">previous</button><span >{{year}}</span><button (click)="setYear('NEXT')">next</button>
+</div>
+<div>
+  <span *ngFor="let month of allMonths" (click)="setMonth(month)" [class.current-month]="currentMonth === month">{{month}}</span>
+</div>
+<table className="calendar-day">
+  <thead>
+    <tr>
+      <th *ngFor="let day of weekDayShort">
+       {{day}}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let week of rows">
+      <td  *ngFor="let day of week" [class.current-day]="currentDay === day"> {{day}}</td>
+    </tr>
+  </tbody>
+</table>
