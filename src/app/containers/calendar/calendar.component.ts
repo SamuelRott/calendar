@@ -69,30 +69,30 @@ export class CalendarComponent implements OnInit {
         this.cells = [];
         this.cells.push(dayStr);
       }
-      if (i === this.totalSlots.length - 1) { // when end loop we add remain date
+      if (i === this.totalSlots.length - 1) {
         this.rows.push(this.cells);
       }
     });
   }
 
-  setMonth(month: string): void {
-    const selectedMonth = this.allMonths.indexOf(month);
+  setDate(what: string, when): void {
     let dateObject = Object.assign({}, this.dateObj);
-    dateObject = moment(dateObject).set('month', selectedMonth);
-    this.dateObj = dateObject;
-    this.setCalendar();
-  }
 
-  setYear(year: number): void {
-    let dateObject = Object.assign({}, this.dateObj);
-    dateObject = moment(dateObject).set('year', year);
-    this.dateObj = dateObject;
-    this.setCalendar();
-  }
+    switch (what) {
+      case 'SET_YEAR': {
+        dateObject = moment(dateObject).set('year', when);
+        break;
+      }
+      case 'SET_MONTH': {
+        dateObject = moment(dateObject).set('month', when);
+        break;
+      }
+      case 'SET_DAY': {
+        dateObject = moment(dateObject).set('date', when);
+        break;
+      }
+    }
 
-  setDay(day: number): void {
-    let dateObject = Object.assign({}, this.dateObj);
-    dateObject = moment(dateObject).set('date', day);
     this.dateObj = dateObject;
     this.setCalendar();
   }
