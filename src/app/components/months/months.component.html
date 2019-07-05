@@ -1,0 +1,3 @@
+<div>
+  <button *ngFor="let month of allMonths" (click)="changeMonth(month)" [class.current-month]="currentMonth === month" type="button">{{month}}</button>
+</div>

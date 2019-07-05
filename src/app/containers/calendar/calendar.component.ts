@@ -11,8 +11,9 @@ export class CalendarComponent implements OnInit {
   dateObj: moment.Moment;
   allMonths: string[];
   currentDay: string;
+  currentDayName: string;
   currentMonth: string;
-  year: string;
+  currentYear: string;
 
   blankDays: any[] = [];
   days: any[] = [];
@@ -27,13 +28,14 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.currentDay = this.dateObj.format('D');
     this.setCalendar();
   }
 
   setCalendar(): void {
     this.currentMonth = this.dateObj.format('MMM');
-    this.year = this.dateObj.format('Y');
+    this.currentDay = this.dateObj.format('D');
+    this.currentDayName = this.dateObj.format('dddd');
+    this.currentYear = this.dateObj.format('Y');
     this.daysInMonth();
     this.blankDays = new Array(Number(this.firstDayOfMonth()));
     this.totalSlots = [...this.blankDays, ...this.days];
@@ -84,13 +86,20 @@ export class CalendarComponent implements OnInit {
   setYear(action: string): void {
     let selectedYear;
     if (action === 'PREVIOUS') {
-      selectedYear =  Number(this.year) - 1;
+      selectedYear =  Number(this.currentYear) - 1;
     } else {
-      selectedYear =  Number(this.year) + 1;
+      selectedYear =  Number(this.currentYear) + 1;
     }
 
     let dateObject = Object.assign({}, this.dateObj);
     dateObject = moment(dateObject).set('year', selectedYear);
+    this.dateObj = dateObject;
+    this.setCalendar();
+  }
+
+  setDay(day): void {
+    let dateObject = Object.assign({}, this.dateObj);
+    dateObject = moment(dateObject).set('date', day);
     this.dateObj = dateObject;
     this.setCalendar();
   }
