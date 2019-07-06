@@ -1,34 +1,18 @@
-<!--<button (click)="addEvent()">add event</button>-->
 <div>
-  <div>
-    <div *ngIf="currentEvents && currentEvents.length > 0">
-      <h5>Current Events</h5>
-      <ul>
-        <li  *ngFor="let event of currentEvents">
-          <span>{{event.text}}</span>
-          <button (click)="deleteCalendarEvent.emit(event)" title="delete this event">X</button>
-        </li>
-      </ul>
-    </div>
-    <div *ngIf="currentEvents && currentEvents.length === 0">
-      <h5>No event for the day.</h5>
-    </div>
-    <div *ngIf="!currentEvents">
-      Loading...
-    </div>
+  <div *ngIf="currentEvents && currentEvents.length > 0">
+    <h5>Current Events</h5>
+    <ul>
+      <li  *ngFor="let event of currentEvents">
+        <span>{{event.text}}</span>
+        <button (click)="deleteCalendarEvent.emit(event)" title="delete this event">X</button>
+      </li>
+    </ul>
   </div>
-  <div>
-    <form action="" method="post">
-      <label>
-        <input #eventTitleInput="ngModel" [(ngModel)]="eventText" name="calendar-event" placeholder="Create an Event"
-               type="text">
-      </label>
-      <input (click)="postEvent()"
-             [disabled]="!eventText"
-             [title]="eventText ? 'post an event' : 'add a title to post an event'"
-             type="submit"
-             value="+">
-    </form>
+  <div *ngIf="currentEvents && currentEvents.length === 0">
+    <h5>No event for the day.</h5>
+  </div>
+  <div *ngIf="!currentEvents">
+    Loading...
   </div>
 </div>
 

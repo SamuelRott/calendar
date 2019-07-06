@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { setMomentDate } from './calendar.enum';
 import { DaysService } from '../../services/days.service';
@@ -10,34 +10,32 @@ import { EventsService } from '../../services/events.service';
   styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit {
-  readonly weekDayShort: string[] = moment.weekdaysShort();
-  readonly  allMonths: string[] = moment.monthsShort();
-
-  events: StoredEvents;
-
   dateObj: moment.Moment;
-
   currentDay: string;
   currentDayName: string;
   currentMonth: string;
   currentYear: string;
   currentDate: string;
-
+  events: StoredEvents;
+  loadingEvent: boolean;
   rows: SelectedDay[][];
 
-  constructor(private eventsService: EventsService) {
-    this.dateObj = moment();
-  }
+  readonly weekDayShort: string[] = moment.weekdaysShort();
+  readonly  allMonths: string[] = moment.monthsShort();
+
+  constructor(private eventsService: EventsService) {}
 
   ngOnInit() {
+    this.dateObj = moment();
     this.setCalendar();
     this.loadEvents();
   }
 
-  async loadEvents() {
-    await this.eventsService.getEvents().toPromise().then((events) => {
+  loadEvents() {
+    this.eventsService.getEvents().toPromise().then((events) => {
       this.events = events;
       this.setCalendar();
+      this.loadingEvent = false;
     });
   }
 
@@ -48,13 +46,14 @@ export class CalendarComponent implements OnInit {
       text
     };
 
-    this.eventsService.addEvent(event).subscribe( () => {
+    this.loadingEvent = true;
+    this.eventsService.addEvent(event).toPromise().then( () => {
       this.loadEvents();
     });
   }
 
   deleteEvent(updatedEvent) {
-    this.eventsService.deleteEvent(updatedEvent).subscribe(async () => {
+    this.eventsService.deleteEvent(updatedEvent).toPromise().then( () => {
       this.loadEvents();
     });
   }

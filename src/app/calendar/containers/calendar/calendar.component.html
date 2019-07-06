@@ -1,22 +1,26 @@
 
 <div class="calendar">
-  <div>
-    <app-day [currentDayNbr]="currentDay" [currentDayName]="currentDayName"></app-day>
-    <app-calendar-event [events]="events?.result" [currentDate]="currentDate" (deleteCalendarEvent)="deleteEvent($event)" (addCalendarEvent)="addEvent($event)"></app-calendar-event>
-  </div>
-  <div>
-    <app-year [currentYear]="currentYear"
-              (setYear)="setDate('year', $event)"></app-year>
-    <app-months [currentMonth]="currentMonth"
-                [allMonths]="allMonths"
-                (setMonth)="setDate('month', $event)"></app-months>
-    <app-days [weekDayShort]="weekDayShort"
-              [currentDay]="currentDay"
-              [currentMonth]="currentMonth"
-              [rows]="rows"
-              (setDay)="setDate('date', $event)"></app-days>
-  </div>
+    <div>
+      <app-day [currentDayNbr]="currentDay" [currentDayName]="currentDayName"></app-day>
+      <app-calendar-event [events]="events?.result" [currentDate]="currentDate"
+                          (deleteCalendarEvent)="deleteEvent($event)"
+                          ></app-calendar-event>
+      <app-add-event *ngIf="!loadingEvent" (addCalendarEvent)="addEvent($event)"></app-add-event>
+      <div *ngIf="loadingEvent">
+        Posting Event...
+      </div>
+    </div>
+   <div>
+     <app-year [currentYear]="currentYear"
+               (setYear)="setDate('year', $event)"></app-year>
+     <app-months [currentMonth]="currentMonth"
+                 [allMonths]="allMonths"
+                 (setMonth)="setDate('month', $event)"></app-months>
+     <app-days [weekDayShort]="weekDayShort"
+               [currentDay]="currentDay"
+               [currentMonth]="currentMonth"
+               [rows]="rows"
+               (setDay)="setDate('date', $event)"></app-days>
+   </div>
 </div>
-<div>
 
-</div>

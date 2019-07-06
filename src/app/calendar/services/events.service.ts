@@ -15,7 +15,7 @@ export class EventsService {
 
   getEvents(): Observable<StoredEvents> {
     return this.http.get<StoredEvents>(this.url).pipe(
-      map((StoredEvents) => this.events = StoredEvents)
+      map((storedEvents) => this.events = storedEvents)
     );
   }
 

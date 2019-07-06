@@ -1,5 +1,4 @@
-import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
-import {NgModel} from '@angular/forms';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-calendar-event',
@@ -7,8 +6,13 @@ import {NgModel} from '@angular/forms';
   styleUrls: ['./calendar-event.component.scss']
 })
 export class CalendarEventComponent {
+  currentEvents: CalendarEvent[];
+
   private _events: CalendarEvent[];
   private _currentDate: string;
+
+  @Output()
+  deleteCalendarEvent = new EventEmitter<CalendarEvent>();
 
   @Input()
   set events(value: CalendarEvent[]) {
@@ -22,26 +26,9 @@ export class CalendarEventComponent {
     this.setCurrentEvent();
   }
 
-  @Output()
-  deleteCalendarEvent = new EventEmitter<CalendarEvent>();
-
-  @Output()
-  addCalendarEvent = new EventEmitter<string>();
-
-  @ViewChild('eventTitleInput', { static: false })
-  eventTitleInput: NgModel;
-
-  eventText: string;
-  currentEvents: CalendarEvent[];
-
-  setCurrentEvent(): void {
+  private setCurrentEvent(): void {
     if (this._events) {
       this.currentEvents = this._events.filter((item) => item.date === this._currentDate);
     }
-  }
-
-  postEvent(): void {
-    this.addCalendarEvent.emit(this.eventText);
-    this.eventTitleInput.reset();
   }
 }

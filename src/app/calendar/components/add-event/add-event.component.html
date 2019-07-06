@@ -1,0 +1,10 @@
+<form action="" method="post" (ngSubmit)="postEvent()">
+  <label>
+    <input #eventTitleInput="ngModel" [(ngModel)]="eventText" name="calendar-event" placeholder="Create an Event"
+           type="text">
+  </label>
+  <button [disabled]="!eventText"
+          [title]="eventText ? 'post an event' : 'add a title to post an event'"
+          type="submit">+</button>
+</form>
+
