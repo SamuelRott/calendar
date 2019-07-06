@@ -48,21 +48,22 @@ export class CalendarComponent implements OnInit {
   startingBlankDaysInMonth(): void {
     this.startingBlankDays = [];
     const currentMonthIndex = this.allMonths.indexOf(this.currentMonth);
-    let lastMonth;
+    let lastMonthIndex;
     let year;
 
     if (currentMonthIndex - 1 >= 0) {
       year = this.currentYear;
-      lastMonth = this.allMonths[currentMonthIndex - 1];
+      lastMonthIndex = currentMonthIndex - 1;
     } else {
       year = Number(this.currentYear) - 1;
-      lastMonth = this.allMonths[this.allMonths.length - 1];
+      lastMonthIndex = this.allMonths.length - 1;
     }
 
+    const lastMonth = this.allMonths[lastMonthIndex];
     const lastMonthsDays = moment(`${year}-${lastMonth}`, 'YYYY-MMM').daysInMonth();
     const firstDays = Number(this.firstDayOfMonth());
 
-    for (let d = lastMonthsDays; d >= (lastMonthsDays - firstDays); d--) {
+    for (let d = lastMonthsDays; d > (lastMonthsDays - firstDays); d--) {
       this.startingBlankDays.unshift({day: d.toString(), month: lastMonth, year: year.toString()});
     }
   }
@@ -70,18 +71,19 @@ export class CalendarComponent implements OnInit {
   endingBlankDaysInMonth(): void {
     this.endingBlankDays = [];
     const currentMonthIndex = this.allMonths.indexOf(this.currentMonth);
-    let nextMonth;
+    let nextMonthIndex;
     let year;
 
     if (currentMonthIndex + 1 <= this.allMonths.length - 1  ) {
       year = this.currentYear;
-      nextMonth = this.allMonths[currentMonthIndex + 1];
+      nextMonthIndex = currentMonthIndex + 1;
     } else {
       year = Number(this.currentYear) + 1;
-      nextMonth = this.allMonths[0];
+      nextMonthIndex = 0;
     }
 
-    for (let d = 1; d <= Number(this.lastDayOfMonth()); d++) {
+    const nextMonth = this.allMonths[nextMonthIndex];
+    for (let d = 1; d < Number(this.lastDayOfMonth()); d++) {
       this.endingBlankDays.push({day: d.toString(), month: nextMonth, year: year.toString()});
     }
   }
