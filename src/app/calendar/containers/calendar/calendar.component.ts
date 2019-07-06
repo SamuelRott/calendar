@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import * as moment from 'moment';
 import { setMomentDate } from './calendar.enum';
 import { DaysService } from '../../services/days.service';
-import {EventsService} from '../../services/events.service';
+import { EventsService } from '../../services/events.service';
 
 @Component({
   selector: 'app-calendar',
@@ -21,6 +21,7 @@ export class CalendarComponent implements OnInit {
   currentDayName: string;
   currentMonth: string;
   currentYear: string;
+  currentDate: string;
 
   rows: SelectedDay[][] = [];
 
@@ -30,44 +31,50 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit() {
     this.setCalendar();
-    this.loadEvents().then(() => console.warn(this));
+    this.loadEvents();
   }
 
   async loadEvents() {
-    this.events = await this.eventsService.getEvents().toPromise();
+    await this.eventsService.getEvents().toPromise().then((events) => {
+      this.events = events;
+      this.setCalendar();
+    });
   }
 
   addEvent(updatedEvent) {
-    // const mockEvent = {
-    //   id: Date.now(),
-    //   date: {this.dateObj.format('YYYY-MMM-D')},
-    //   text: 'miaw'
-    // };
+    const mockEvent = {
+      id: Date.now(),
+      date: this.currentDate,
+      text: 'miaw'
+    };
 
-    this.eventsService.addEvent(updatedEvent).subscribe(async () => {
-      this.events = await this.eventsService.getEvents().toPromise();
+    this.eventsService.addEvent(mockEvent).subscribe( () => {
+      this.loadEvents();
     });
   }
 
   deleteEvent(updatedEvent) {
     this.eventsService.deleteEvent(updatedEvent).subscribe(async () => {
-      console.warn('deleteEvent')
-      this.events = await this.eventsService.getEvents().toPromise();
+      this.loadEvents();
     });
   }
 
   setCalendar(): void {
-    // TODO refactor is only need by day component, we can passs an object and extract info from there
     this.currentDay = this.dateObj.format('D');
     this.currentDayName = this.dateObj.format('dddd');
     this.currentMonth = this.dateObj.format('MMM');
     this.currentYear = this.dateObj.format('YYYY');
-    // end
+    this.currentDate =  this.dateObj.format('YYYY-MMM-D');
     this.setDaysInCalendar();
   }
 
   setDaysInCalendar(): void {
-    const totalSlots: SelectedDay[] = DaysService.daysInCalendar(this.dateObj, this.allMonths);
+    let events = [];
+    if (this.events && this.events.result && this.events.ok) {
+      events = this.events.result;
+    }
+
+    const totalSlots: SelectedDay[] = DaysService.daysInCalendar(this.dateObj, this.allMonths, events);
     this.rows = [];
     let cells = [];
 

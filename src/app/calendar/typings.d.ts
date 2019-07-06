@@ -2,15 +2,16 @@ declare interface SelectedDay {
   day: string;
   month: string;
   year: string;
+  event?: boolean;
 }
 
-declare interface Event {
+declare interface CalendarEvent {
   id: number;
   date: string;
   text: string;
 }
 
 declare interface StoredEvents {
-  result: Event[];
+  result: CalendarEvent[];
   ok: boolean;
 }

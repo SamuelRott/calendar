@@ -5,6 +5,7 @@ import {YearComponent} from './components/year/year.component';
 import {DaysComponent} from './components/days/days.component';
 import {MonthsComponent} from './components/months/months.component';
 import {DayComponent} from './components/day/day.component';
+import { CalendarEventComponent } from './components/calendar-event/calendar-event.component';
 
 
 
@@ -14,7 +15,8 @@ import {DayComponent} from './components/day/day.component';
     MonthsComponent,
     DaysComponent,
     DayComponent,
-    YearComponent
+    YearComponent,
+    CalendarEventComponent
   ],
   imports: [
     CommonModule

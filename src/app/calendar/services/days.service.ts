@@ -57,20 +57,37 @@ export class DaysService {
     return  endingBlankDays;
   }
 
-  static daysInCalendar(dateObj: moment.Moment, allMonths): SelectedDay[] {
+
+
+  static addEvent(days: SelectedDay[], events: CalendarEvent[] = []) {
+
+    const key = 'date';
+    const CalendarEventHash = events.reduce((obj, item) => {
+      obj[item[key]] = item;
+      return obj;
+    }, {});
+
+    return days.map((day) => {
+      const dayDate = `${day.year}-${day.month}-${day.day}`;
+      return {
+        ...day,
+        event: !!CalendarEventHash[dayDate]
+      };
+    });
+  }
+
+  static daysInCalendar(dateObj: moment.Moment, allMonths: string[], events: CalendarEvent[]): SelectedDay[] {
     const currentMonth: string = dateObj.format('MMM');
-    const currentMonthIndex = allMonths.indexOf(currentMonth);
+    const currentMonthIndex: number = allMonths.indexOf(currentMonth);
     const currentYear: string = dateObj.format('YYYY');
     const numberOfDayInMonth: number = Number(dateObj.daysInMonth());
     const firstDayOfMonth: string =  moment(dateObj).startOf(setMomentDate.month).format('d');
     const lastDayOfMonth: string = moment(dateObj).endOf(setMomentDate.month).format('d');
 
-    return [
+    return DaysService.addEvent([
       ...DaysService.startingBlankDaysInMonth(allMonths, firstDayOfMonth, currentMonthIndex, currentYear),
       ...DaysService.daysInMonth(numberOfDayInMonth, currentMonth, currentYear),
       ...DaysService.endingBlankDaysInMonth(allMonths, lastDayOfMonth, currentMonthIndex, currentYear)
-    ];
+    ], events);
   }
-
-
 }

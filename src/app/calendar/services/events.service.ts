@@ -19,12 +19,15 @@ export class EventsService {
     );
   }
 
-  deleteEvent(event: Event): Observable<any> {
+  deleteEvent(event: CalendarEvent): Observable<any> {
     const updatedEvents = this.events.result.filter((item) => event.id !== item.id);
     return this.http.post<any>(this.url, updatedEvents);
   }
 
-  addEvent(event: Event): Observable<any> {
+  addEvent(event: CalendarEvent): Observable<any> {
+    if (!this.events.result) {
+      this.events.result = [];
+    }
     this.events.result.push(event);
     return this.http.post<any>(this.url, this.events.result);
   }
