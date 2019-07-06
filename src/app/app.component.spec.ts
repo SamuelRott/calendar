@@ -1,26 +1,18 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import {CalendarComponent} from './containers/calendar/calendar.component';
-import {MonthsComponent} from './components/months/months.component';
-import {DaysComponent} from './components/days/days.component';
-import {DayComponent} from './components/day/day.component';
-import {YearComponent} from './components/year/year.component';
+import {CalendarModule} from './calendar/calendar.module';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        CalendarModule
       ],
       declarations: [
         AppComponent,
-        CalendarComponent,
-        MonthsComponent,
-        DaysComponent,
-        DayComponent,
-        YearComponent
-      ],
+      ]
     }).compileComponents();
   }));
 
