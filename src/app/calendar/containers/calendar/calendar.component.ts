@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import * as moment from 'moment';
 import { setMomentDate } from './calendar.enum';
+import { DaysService } from '../../services/days.service';
 
 @Component({
   selector: 'app-calendar',
@@ -18,12 +19,7 @@ export class CalendarComponent implements OnInit {
   currentMonth: string;
   currentYear: string;
 
-  startingBlankDays: SelectedDay[] = [];
-  endingBlankDays: SelectedDay[] = [];
-  days: SelectedDay[] = [];
-  totalSlots: SelectedDay[] = [];
   rows: SelectedDay[][] = [];
-
 
   constructor() {
     this.dateObj = moment();
@@ -34,84 +30,21 @@ export class CalendarComponent implements OnInit {
   }
 
   setCalendar(): void {
-    this.currentMonth = this.dateObj.format('MMM');
+    // TODO refactor is only need by day component, we can passs an object and extract info from there
     this.currentDay = this.dateObj.format('D');
     this.currentDayName = this.dateObj.format('dddd');
+    // end
+    this.currentMonth = this.dateObj.format('MMM');
     this.currentYear = this.dateObj.format('YYYY');
-    this.daysInMonth();
-    this.startingBlankDaysInMonth();
-    this.endingBlankDaysInMonth();
-    this.totalSlots = [...this.startingBlankDays, ...this.days, ...this.endingBlankDays];
-    this.setSlots();
+    this.setDaysInCalendar();
   }
 
-  startingBlankDaysInMonth(): void {
-    this.startingBlankDays = [];
-    const currentMonthIndex = this.allMonths.indexOf(this.currentMonth);
-    let lastMonthIndex;
-    let year;
-
-    if (currentMonthIndex - 1 >= 0) {
-      year = this.currentYear;
-      lastMonthIndex = currentMonthIndex - 1;
-    } else {
-      year = Number(this.currentYear) - 1;
-      lastMonthIndex = this.allMonths.length - 1;
-    }
-
-    const lastMonth = this.allMonths[lastMonthIndex];
-    const lastMonthsDays = moment(`${year}-${lastMonth}`, 'YYYY-MMM').daysInMonth();
-    const firstDays = Number(this.firstDayOfMonth());
-
-    for (let d = lastMonthsDays; d > (lastMonthsDays - firstDays); d--) {
-      this.startingBlankDays.unshift({day: d.toString(), month: lastMonth, year: year.toString()});
-    }
-  }
-
-  endingBlankDaysInMonth(): void {
-    this.endingBlankDays = [];
-    const currentMonthIndex = this.allMonths.indexOf(this.currentMonth);
-    let nextMonthIndex;
-    let year;
-
-    if (currentMonthIndex + 1 <= this.allMonths.length - 1  ) {
-      year = this.currentYear;
-      nextMonthIndex = currentMonthIndex + 1;
-    } else {
-      year = Number(this.currentYear) + 1;
-      nextMonthIndex = 0;
-    }
-
-    const nextMonth = this.allMonths[nextMonthIndex];
-    for (let d = 1; d < Number(this.lastDayOfMonth()); d++) {
-      this.endingBlankDays.push({day: d.toString(), month: nextMonth, year: year.toString()});
-    }
-  }
-
-  daysInMonth(): void {
-    this.days = [];
-    for (let d = 1; d <= Number(this.dateObj.daysInMonth()); d++) {
-      this.days.push({day: d.toString(), month: this.currentMonth, year: this.currentYear});
-    }
-  }
-
-  firstDayOfMonth(): string {
-    return  moment(this.dateObj)
-      .startOf(setMomentDate.month)
-      .format('d');
-  }
-
-  lastDayOfMonth(): string {
-    return  moment(this.dateObj)
-      .endOf(setMomentDate.month)
-      .format('d');
-  }
-
-  setSlots(): void {
+  setDaysInCalendar(): void {
+    const totalSlots: SelectedDay[] = DaysService.daysInCalendar(this.dateObj, this.allMonths);
     this.rows = [];
     let cells = [];
 
-    this.totalSlots.forEach((day, i) => {
+    totalSlots.forEach((day, i) => {
       if (i % 7 !== 0) {
         cells.push(day);
       } else {
@@ -120,7 +53,7 @@ export class CalendarComponent implements OnInit {
         cells.push(day);
       }
 
-      if (i === this.totalSlots.length - 1) {
+      if (i === totalSlots.length - 1) {
         this.rows.push(cells);
       }
     });
