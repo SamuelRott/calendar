@@ -4,8 +4,15 @@
     <app-day [currentDayNbr]="currentDay" [currentDayName]="currentDayName"></app-day>
   </div>
   <div>
-    <app-year [currentYear]="currentYear" (setYear)="setDate('SET_YEAR', $event)"></app-year>
-    <app-months [currentMonth]="currentMonth" [allMonths]="allMonths" (setMonth)="setDate('SET_MONTH', $event)"></app-months>
-    <app-days [weekDayShort]="weekDayShort" [currentDay]="currentDay" [rows]="rows" (setDay)="setDate('SET_DAY', $event)"></app-days>
+    <app-year [currentYear]="currentYear"
+              (setYear)="setDate('SET_YEAR', $event)"></app-year>
+    <app-months [currentMonth]="currentMonth"
+                [allMonths]="allMonths"
+                (setMonth)="setDate('SET_MONTH', $event)"></app-months>
+    <app-days [weekDayShort]="weekDayShort"
+              [currentDay]="currentDay"
+              [currentMonth]="currentMonth"
+              [rows]="rows"
+              (setDay)="setDate('SET_DAY', $event)"></app-days>
   </div>
 </div>

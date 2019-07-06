@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import * as moment from 'moment';
+import { SelectedDay } from '../../typings';
 
 @Component({
   selector: 'app-calendar',
@@ -15,11 +16,11 @@ export class CalendarComponent implements OnInit {
   currentMonth: string;
   currentYear: string;
 
-  blankDays: any[] = [];
-  days: any[] = [];
-  totalSlots: any[] = [];
+  startingBlankDays: SelectedDay[] = [];
+  endingBlankDays: SelectedDay[] = [];
+  days: SelectedDay[] = [];
+  totalSlots: SelectedDay[] = [];
   rows: any[] = [];
-  cells: any[] = [];
 
   constructor() {
     this.dateObj = moment();
@@ -37,15 +38,54 @@ export class CalendarComponent implements OnInit {
     this.currentDayName = this.dateObj.format('dddd');
     this.currentYear = this.dateObj.format('YYYY');
     this.daysInMonth();
-    this.blankDays = new Array(Number(this.firstDayOfMonth()));
-    this.totalSlots = [...this.blankDays, ...this.days];
+    this.startingBlankDaysInMonth();
+    this.endingBlankDaysInMonth();
+    this.totalSlots = [...this.startingBlankDays, ...this.days, ...this.endingBlankDays];
     this.setSlots();
   }
 
   daysInMonth(): void {
     this.days = [];
     for (let d = 1; d <= Number(this.dateObj.daysInMonth()); d++) {
-      this.days.push(d);
+      this.days.push({day: d.toString(), month: this.currentMonth, year: this.currentYear});
+    }
+  }
+
+  startingBlankDaysInMonth(): void {
+    this.startingBlankDays = [];
+    const currentMonthIndex = this.allMonths.indexOf(this.currentMonth);
+    let lastMonth;
+    let year;
+
+    if (currentMonthIndex - 1 >= 0) {
+      year = this.currentYear;
+      lastMonth = this.allMonths[currentMonthIndex - 1];
+    } else {
+      year = Number(this.currentYear) - 1;
+      lastMonth = this.allMonths[this.allMonths.length - 1];
+    }
+
+    for (let d = 1; d <= Number(this.firstDayOfMonth()); d++) {
+      this.startingBlankDays.push({day: d.toString(), month: lastMonth, year: year.toString()});
+    }
+  }
+
+  endingBlankDaysInMonth(): void {
+    this.endingBlankDays = [];
+    const currentMonthIndex = this.allMonths.indexOf(this.currentMonth);
+    let nextMonth;
+    let year;
+
+    if (currentMonthIndex + 1 <= this.allMonths.length - 1  ) {
+      year = this.currentYear;
+      nextMonth = this.allMonths[currentMonthIndex + 1];
+    } else {
+      year = Number(this.currentYear) + 1;
+      nextMonth = this.allMonths[0];
+    }
+
+    for (let d = 1; d <= Number(this.lastDayOfMonth()); d++) {
+      this.endingBlankDays.push({day: d.toString(), month: nextMonth, year: year.toString()});
     }
   }
 
@@ -55,38 +95,43 @@ export class CalendarComponent implements OnInit {
       .format('d');
   }
 
+  lastDayOfMonth(): string {
+    return  moment(this.dateObj)
+      .endOf('month')
+      .format('d');
+  }
+
   setSlots(): void {
     this.rows = [];
-    this.cells = [];
+    let cells = [];
 
     this.totalSlots.forEach((day, i) => {
-      const dayStr = day ? day.toString() : '';
-
       if (i % 7 !== 0) {
-        this.cells.push(dayStr);
+        cells.push(day);
       } else {
-        this.rows.push(this.cells);
-        this.cells = [];
-        this.cells.push(dayStr);
+        this.rows.push(cells);
+        cells = [];
+        cells.push(day);
       }
+
       if (i === this.totalSlots.length - 1) {
-        this.rows.push(this.cells);
+        this.rows.push(cells);
       }
     });
   }
 
-  setDate(what: string, when): void {
+  setDate(what: string, options): void {
     switch (what) {
       case 'SET_YEAR': {
-        this.dateObj = moment(this.dateObj).set('year', when);
+        this.dateObj = moment(this.dateObj).set('year', options);
         break;
       }
       case 'SET_MONTH': {
-        this.dateObj = moment(this.dateObj).set('month', when);
+        this.dateObj = moment(this.dateObj).set('month', options);
         break;
       }
       case 'SET_DAY': {
-        this.dateObj = moment(this.dateObj).set('date', when);
+        this.dateObj = moment(this.dateObj).set('year', options.year).set('month', options.month).set('date', options.day);
         break;
       }
     }

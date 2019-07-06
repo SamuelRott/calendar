@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {SelectedDay} from '../../typings';
 
 @Component({
   selector: 'app-days',
@@ -10,11 +11,14 @@ export class DaysComponent {
   currentDay: string;
 
   @Input()
-  rows: string[];
+  currentMonth: string;
+
+  @Input()
+  rows: SelectedDay[][];
 
   @Input()
   weekDayShort: string[];
 
   @Output()
-  setDay = new EventEmitter<number>();
+  setDay = new EventEmitter<SelectedDay>();
 }
