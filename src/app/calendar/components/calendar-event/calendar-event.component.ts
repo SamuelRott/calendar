@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {NgModel} from '@angular/forms';
 
 @Component({
   selector: 'app-calendar-event',
@@ -24,6 +25,13 @@ export class CalendarEventComponent {
   @Output()
   deleteCalendarEvent = new EventEmitter<CalendarEvent>();
 
+  @Output()
+  addCalendarEvent = new EventEmitter<string>();
+
+  @ViewChild('eventTitleInput', { static: false })
+  eventTitleInput: NgModel;
+
+  eventText: string;
   currentEvents: CalendarEvent[];
 
   setCurrentEvent(): void {
@@ -32,4 +40,8 @@ export class CalendarEventComponent {
     }
   }
 
+  postEvent(): void {
+    this.addCalendarEvent.emit(this.eventText);
+    this.eventTitleInput.reset();
+  }
 }

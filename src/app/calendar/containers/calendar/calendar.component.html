@@ -2,7 +2,7 @@
 <div class="calendar">
   <div>
     <app-day [currentDayNbr]="currentDay" [currentDayName]="currentDayName"></app-day>
-    <app-calendar-event [events]="events?.result" [currentDate]="currentDate" (deleteCalendarEvent)="deleteEvent($event)"></app-calendar-event>
+    <app-calendar-event [events]="events?.result" [currentDate]="currentDate" (deleteCalendarEvent)="deleteEvent($event)" (addCalendarEvent)="addEvent($event)"></app-calendar-event>
   </div>
   <div>
     <app-year [currentYear]="currentYear"

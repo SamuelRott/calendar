@@ -6,6 +6,7 @@ import {DaysComponent} from './components/days/days.component';
 import {MonthsComponent} from './components/months/months.component';
 import {DayComponent} from './components/day/day.component';
 import { CalendarEventComponent } from './components/calendar-event/calendar-event.component';
+import {FormsModule} from '@angular/forms';
 
 
 
@@ -19,7 +20,8 @@ import { CalendarEventComponent } from './components/calendar-event/calendar-eve
     CalendarEventComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   exports: [CalendarComponent]
 })

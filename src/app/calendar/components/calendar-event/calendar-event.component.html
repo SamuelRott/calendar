@@ -6,7 +6,7 @@
       <ul>
         <li  *ngFor="let event of currentEvents">
           <span>{{event.text}}</span>
-          <button (click)="deleteCalendarEvent.emit(event)">X</button>
+          <button (click)="deleteCalendarEvent.emit(event)" title="delete this event">X</button>
         </li>
       </ul>
     </div>
@@ -18,8 +18,16 @@
     </div>
   </div>
   <div>
-    <form action="">
-
+    <form action="" method="post">
+      <label>
+        <input #eventTitleInput="ngModel" [(ngModel)]="eventText" name="calendar-event" placeholder="Create an Event"
+               type="text">
+      </label>
+      <input (click)="postEvent()"
+             [disabled]="!eventText"
+             [title]="eventText ? 'post an event' : 'add a title to post an event'"
+             type="submit"
+             value="+">
     </form>
   </div>
 </div>
