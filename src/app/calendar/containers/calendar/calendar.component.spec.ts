@@ -7,6 +7,8 @@ import {DayComponent} from '../../components/day/day.component';
 import {YearComponent} from '../../components/year/year.component';
 import {CalendarEventComponent} from '../../components/calendar-event/calendar-event.component';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {AddEventComponent} from '../../components/add-event/add-event.component';
+import {FormsModule} from '@angular/forms';
 
 describe('CalendarComponent', () => {
   let component: CalendarComponent;
@@ -15,7 +17,8 @@ describe('CalendarComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        FormsModule
       ],
       declarations: [
         CalendarComponent,
@@ -23,7 +26,8 @@ describe('CalendarComponent', () => {
         DaysComponent,
         DayComponent,
         YearComponent,
-        CalendarEventComponent
+        CalendarEventComponent,
+        AddEventComponent
       ]
     })
     .compileComponents();

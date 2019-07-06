@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { CalendarModule } from './calendar/calendar.module';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {FormsModule} from '@angular/forms';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -10,6 +11,7 @@ describe('AppComponent', () => {
       imports: [
         HttpClientTestingModule,
         RouterTestingModule,
+        FormsModule,
         CalendarModule
       ],
       declarations: [
