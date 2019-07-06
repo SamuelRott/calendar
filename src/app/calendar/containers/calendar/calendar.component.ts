@@ -33,9 +33,9 @@ export class CalendarComponent implements OnInit {
     // TODO refactor is only need by day component, we can passs an object and extract info from there
     this.currentDay = this.dateObj.format('D');
     this.currentDayName = this.dateObj.format('dddd');
-    // end
     this.currentMonth = this.dateObj.format('MMM');
     this.currentYear = this.dateObj.format('YYYY');
+    // end
     this.setDaysInCalendar();
   }
 
