@@ -5,14 +5,14 @@
   </div>
   <div>
     <app-year [currentYear]="currentYear"
-              (setYear)="setDate('SET_YEAR', $event)"></app-year>
+              (setYear)="setDate('year', $event)"></app-year>
     <app-months [currentMonth]="currentMonth"
                 [allMonths]="allMonths"
-                (setMonth)="setDate('SET_MONTH', $event)"></app-months>
+                (setMonth)="setDate('month', $event)"></app-months>
     <app-days [weekDayShort]="weekDayShort"
               [currentDay]="currentDay"
               [currentMonth]="currentMonth"
               [rows]="rows"
-              (setDay)="setDate('SET_DAY', $event)"></app-days>
+              (setDay)="setDate('date', $event)"></app-days>
   </div>
 </div>

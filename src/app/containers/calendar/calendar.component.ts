@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import * as moment from 'moment';
-import { SelectedDay } from '../../typings';
+import { setMomentDate } from './calendar.enum';
 
 @Component({
   selector: 'app-calendar',
@@ -91,13 +91,13 @@ export class CalendarComponent implements OnInit {
 
   firstDayOfMonth(): string {
     return  moment(this.dateObj)
-      .startOf('month')
+      .startOf(setMomentDate.month)
       .format('d');
   }
 
   lastDayOfMonth(): string {
     return  moment(this.dateObj)
-      .endOf('month')
+      .endOf(setMomentDate.month)
       .format('d');
   }
 
@@ -120,18 +120,21 @@ export class CalendarComponent implements OnInit {
     });
   }
 
-  setDate(what: string, options): void {
-    switch (what) {
-      case 'SET_YEAR': {
-        this.dateObj = moment(this.dateObj).set('year', options);
+  setDate(action: string, options): void {
+    switch (action) {
+      case setMomentDate.year: {
+        this.dateObj = moment(this.dateObj).set(setMomentDate.year, options);
         break;
       }
-      case 'SET_MONTH': {
-        this.dateObj = moment(this.dateObj).set('month', options);
+      case setMomentDate.month: {
+        this.dateObj = moment(this.dateObj).set(setMomentDate.month, options);
         break;
       }
-      case 'SET_DAY': {
-        this.dateObj = moment(this.dateObj).set('year', options.year).set('month', options.month).set('date', options.day);
+      case setMomentDate.date: {
+        this.dateObj = moment(this.dateObj)
+          .set(setMomentDate.year, options.year)
+          .set(setMomentDate.month, options.month)
+          .set(setMomentDate.date, options.day);
         break;
       }
     }

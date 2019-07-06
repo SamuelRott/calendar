@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {SelectedDay} from '../../typings';
 
 @Component({
   selector: 'app-days',
