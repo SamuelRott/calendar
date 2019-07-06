@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {CalendarModule} from './calendar/calendar.module';
+import { CalendarModule } from './calendar/calendar.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import {CalendarModule} from './calendar/calendar.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     CalendarModule
   ],
   providers: [    CalendarModule],

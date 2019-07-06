@@ -16,3 +16,10 @@
               (setDay)="setDate('date', $event)"></app-days>
   </div>
 </div>
+<div>
+<!--  <button (click)="addEvent()">add event</button>-->
+  <div>
+    <span *ngFor="let event of events?.result" (click)="deleteEvent(event)">{{event.id}}</span>
+  </div>
+  <button >delete event</button>
+</div>

@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import * as moment from 'moment';
 import { setMomentDate } from './calendar.enum';
 import { DaysService } from '../../services/days.service';
+import {EventsService} from '../../services/events.service';
 
 @Component({
   selector: 'app-calendar',
@@ -12,6 +13,8 @@ export class CalendarComponent implements OnInit {
   readonly weekDayShort: string[] = moment.weekdaysShort();
   readonly  allMonths: string[] = moment.monthsShort();
 
+  events: StoredEvents;
+
   dateObj: moment.Moment;
 
   currentDay: string;
@@ -21,12 +24,36 @@ export class CalendarComponent implements OnInit {
 
   rows: SelectedDay[][] = [];
 
-  constructor() {
+  constructor(private eventsService: EventsService) {
     this.dateObj = moment();
   }
 
   ngOnInit() {
     this.setCalendar();
+    this.loadEvents().then(() => console.warn(this));
+  }
+
+  async loadEvents() {
+    this.events = await this.eventsService.getEvents().toPromise();
+  }
+
+  addEvent(updatedEvent) {
+    // const mockEvent = {
+    //   id: Date.now(),
+    //   date: {this.dateObj.format('YYYY-MMM-D')},
+    //   text: 'miaw'
+    // };
+
+    this.eventsService.addEvent(updatedEvent).subscribe(async () => {
+      this.events = await this.eventsService.getEvents().toPromise();
+    });
+  }
+
+  deleteEvent(updatedEvent) {
+    this.eventsService.deleteEvent(updatedEvent).subscribe(async () => {
+      console.warn('deleteEvent')
+      this.events = await this.eventsService.getEvents().toPromise();
+    });
   }
 
   setCalendar(): void {

@@ -1,42 +1,31 @@
 import { Injectable } from '@angular/core';
-import {CalendarModule} from '../calendar.module';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-
-const lol = [
-  {
-    date: 'string',
-    text: 'Meeting with mom'
-  }
-];
-
-const miaw = {
-  2019: {
-    jan: {
-      2: [
-        {text: 'miaw'}
-      ]
-    }
-  }
-};
+import {map} from 'rxjs/operators';
 
 @Injectable({
-  providedIn: CalendarModule
+  providedIn: 'root'
 })
 export class EventsService {
+  private events: StoredEvents;
 
+  private url = 'https://www.jsonstore.io/be6ee87ce7f2001579cfe86d69f0199f77df9fed385dbe21b77d7ca2c31391cb';
 
   constructor(private http: HttpClient) {}
 
-  getEvents(): Observable<any> {
-    return this.http.get<any>('lol');
+  getEvents(): Observable<StoredEvents> {
+    return this.http.get<StoredEvents>(this.url).pipe(
+      map((StoredEvents) => this.events = StoredEvents)
+    );
   }
 
-  addEvent(): Observable<any> {
-    return this.http.post<any>('lol', {});
+  deleteEvent(event: Event): Observable<any> {
+    const updatedEvents = this.events.result.filter((item) => event.id !== item.id);
+    return this.http.post<any>(this.url, updatedEvents);
   }
 
-  deleteEvent(): Observable<any> {
-    return this.http.delete<any>('lol');
+  addEvent(event: Event): Observable<any> {
+    this.events.result.push(event);
+    return this.http.post<any>(this.url, this.events.result);
   }
 }
