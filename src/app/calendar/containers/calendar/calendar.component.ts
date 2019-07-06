@@ -23,7 +23,7 @@ export class CalendarComponent implements OnInit {
   currentYear: string;
   currentDate: string;
 
-  rows: SelectedDay[][] = [];
+  rows: SelectedDay[][];
 
   constructor(private eventsService: EventsService) {
     this.dateObj = moment();
@@ -41,14 +41,14 @@ export class CalendarComponent implements OnInit {
     });
   }
 
-  addEvent(updatedEvent) {
-    const mockEvent = {
+  addEvent(text: string) {
+    const event = {
       id: Date.now(),
       date: this.currentDate,
-      text: 'miaw'
+      text
     };
 
-    this.eventsService.addEvent(mockEvent).subscribe( () => {
+    this.eventsService.addEvent(event).subscribe( () => {
       this.loadEvents();
     });
   }

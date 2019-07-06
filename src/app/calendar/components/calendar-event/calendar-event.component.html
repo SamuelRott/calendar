@@ -1,4 +1,26 @@
 <!--<button (click)="addEvent()">add event</button>-->
-<div *ngFor="let event of currentEvents()" >
-  <span >{{event.id}}</span><br>
+<div>
+  <div>
+    <div *ngIf="currentEvents && currentEvents.length > 0">
+      <h5>Current Events</h5>
+      <ul>
+        <li  *ngFor="let event of currentEvents">
+          <span>{{event.text}}</span>
+          <button (click)="deleteCalendarEvent.emit(event)">X</button>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="currentEvents && currentEvents.length === 0">
+      <h5>No event for the day.</h5>
+    </div>
+    <div *ngIf="!currentEvents">
+      Loading...
+    </div>
+  </div>
+  <div>
+    <form action="">
+
+    </form>
+  </div>
 </div>
+
