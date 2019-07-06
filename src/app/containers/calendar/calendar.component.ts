@@ -8,9 +8,11 @@ import { setMomentDate } from './calendar.enum';
   styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit {
-  weekDayShort: string[];
+  readonly weekDayShort: string[] = moment.weekdaysShort();
+  readonly  allMonths: string[] = moment.monthsShort();
+
   dateObj: moment.Moment;
-  allMonths: string[];
+
   currentDay: string;
   currentDayName: string;
   currentMonth: string;
@@ -20,12 +22,11 @@ export class CalendarComponent implements OnInit {
   endingBlankDays: SelectedDay[] = [];
   days: SelectedDay[] = [];
   totalSlots: SelectedDay[] = [];
-  rows: any[] = [];
+  rows: SelectedDay[][] = [];
+
 
   constructor() {
     this.dateObj = moment();
-    this.weekDayShort = moment.weekdaysShort();
-    this.allMonths = moment.monthsShort();
   }
 
   ngOnInit() {
@@ -44,13 +45,6 @@ export class CalendarComponent implements OnInit {
     this.setSlots();
   }
 
-  daysInMonth(): void {
-    this.days = [];
-    for (let d = 1; d <= Number(this.dateObj.daysInMonth()); d++) {
-      this.days.push({day: d.toString(), month: this.currentMonth, year: this.currentYear});
-    }
-  }
-
   startingBlankDaysInMonth(): void {
     this.startingBlankDays = [];
     const currentMonthIndex = this.allMonths.indexOf(this.currentMonth);
@@ -65,8 +59,11 @@ export class CalendarComponent implements OnInit {
       lastMonth = this.allMonths[this.allMonths.length - 1];
     }
 
-    for (let d = 1; d <= Number(this.firstDayOfMonth()); d++) {
-      this.startingBlankDays.push({day: d.toString(), month: lastMonth, year: year.toString()});
+    const lastMonthsDays = moment(`${year}-${lastMonth}`, 'YYYY-MMM').daysInMonth();
+    const firstDays = Number(this.firstDayOfMonth());
+
+    for (let d = lastMonthsDays; d >= (lastMonthsDays - firstDays); d--) {
+      this.startingBlankDays.unshift({day: d.toString(), month: lastMonth, year: year.toString()});
     }
   }
 
@@ -86,6 +83,13 @@ export class CalendarComponent implements OnInit {
 
     for (let d = 1; d <= Number(this.lastDayOfMonth()); d++) {
       this.endingBlankDays.push({day: d.toString(), month: nextMonth, year: year.toString()});
+    }
+  }
+
+  daysInMonth(): void {
+    this.days = [];
+    for (let d = 1; d <= Number(this.dateObj.daysInMonth()); d++) {
+      this.days.push({day: d.toString(), month: this.currentMonth, year: this.currentYear});
     }
   }
 
