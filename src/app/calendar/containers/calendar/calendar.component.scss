@@ -1,3 +1,18 @@
 .calendar {
   display: flex;
+  overflow: hidden;
+  position: relative;
+  padding-top: 40px;
+}
+
+.keyboard-access {
+  position: absolute;
+  top: 0;
+  width: 400px;
+  transform: translateY(-100px);
+
+
+  &.is-active {
+    transform: translateY(0);
+  }
 }

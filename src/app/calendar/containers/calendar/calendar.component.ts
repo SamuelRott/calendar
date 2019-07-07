@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import * as moment from 'moment';
 import { setMomentDate } from './calendar.enum';
 import { DaysService } from '../../services/days.service';
 import { EventsService } from '../../services/events.service';
+import {fromEvent} from 'rxjs';
 
 @Component({
   selector: 'app-calendar',
@@ -17,9 +18,10 @@ export class CalendarComponent implements OnInit {
   currentYear: string;
   currentDate: string;
   numberOfDayInMonth: number;
+  rows: SelectedDay[][];
   events: StoredEvents;
   loadingEvent: boolean;
-  rows: SelectedDay[][];
+  keyboardAccess: boolean;
 
   readonly weekDayShort: string[] = moment.weekdaysShort();
   readonly  allMonths: string[] = moment.monthsShort();
@@ -30,6 +32,12 @@ export class CalendarComponent implements OnInit {
     this.dateObj = moment();
     this.setCalendar();
     this.loadEvents();
+
+    fromEvent(document, 'keyup').subscribe((event: any) => {
+      if (event.key === 'Tab') {
+        this.keyboardAccess = true;
+      }
+    });
   }
 
   loadEvents() {
@@ -114,12 +122,5 @@ export class CalendarComponent implements OnInit {
       }
     }
     this.setCalendar();
-  }
-
-  goToDate() {
-    // this.dateObj = moment(this.dateObj)
-    //   .set(setMomentDate.year, options.year)
-    //   .set(setMomentDate.month, options.month)
-    //   .set(setMomentDate.date, options.day);
   }
 }

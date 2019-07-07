@@ -1,6 +1,8 @@
 <div class="calendar">
-  <app-keyboard-access (setDate)="setDate('date', $event)" [allMonths]="allMonths" [currentDay]="currentDay" [currentMonth]="currentMonth"
-                       [currentYear]="currentYear" [numberOfDayInMonth]="numberOfDayInMonth"></app-keyboard-access>
+  <div class="keyboard-access" [class.is-active]="keyboardAccess">
+    <app-keyboard-access (setDate)="setDate('date', $event)" [allMonths]="allMonths" [currentDay]="currentDay" [currentMonth]="currentMonth"
+                         [currentYear]="currentYear" [numberOfDayInMonth]="numberOfDayInMonth"></app-keyboard-access>
+  </div>
   <div>
       <app-day [currentDayNbr]="currentDay" [currentDayName]="currentDayName"></app-day>
       <app-calendar-event [events]="events?.result" [currentDate]="currentDate"
