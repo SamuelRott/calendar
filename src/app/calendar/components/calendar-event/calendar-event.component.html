@@ -1,15 +1,15 @@
 <div>
   <div *ngIf="currentEvents && currentEvents.length > 0">
-    <h5>Current Events</h5>
+    <span>Current Events</span>
     <ul class="event-list">
       <li  *ngFor="let event of currentEvents">
         <span>{{event.text}}</span>
-        <button (click)="deleteCalendarEvent.emit(event)" title="delete this event">X</button>
+        <button (click)="deleteCalendarEvent.emit(event)" [disabled]="loadingEvent" title="delete this event">X</button>
       </li>
     </ul>
   </div>
   <div *ngIf="currentEvents && currentEvents.length === 0">
-    <h5>No event for the day.</h5>
+    <span>No event for the day.</span>
   </div>
   <div *ngIf="!currentEvents">
     Loading...

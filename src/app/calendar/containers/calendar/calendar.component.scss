@@ -24,6 +24,8 @@
 }
 
 .current-day {
+  display: flex;
+  flex-direction: column;
   width: $current-day-width;
   max-width: $current-day-width;
   padding: $large-spacing;

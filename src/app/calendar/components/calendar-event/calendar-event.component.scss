@@ -1,7 +1,10 @@
 @import 'variables';
 
+:host {
+  flex-grow: 1;
+}
 .event-list {
   max-height: $event-list-max-height;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }

@@ -58,6 +58,7 @@ export class CalendarComponent implements OnInit {
   }
 
   deleteEvent(updatedEvent) {
+    this.loadingEvent = true;
     this.eventsService.deleteEvent(updatedEvent).toPromise().then( () => {
       this.loadEvents();
     });
