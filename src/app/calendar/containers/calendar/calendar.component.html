@@ -1,30 +1,30 @@
 <div class="calendar">
   <div class="keyboard-access" [class.is-active]="keyboardAccess">
-    <button type="button  "  *ngIf="!showKeyboardAccess">Use keyboard to set date ?</button>
-    <app-keyboard-access *ngIf="showKeyboardAccess" (setDate)="setDate('date', $event)" [allMonths]="allMonths" [currentDay]="currentDay" [currentMonth]="currentMonth"
+    <button *ngIf="!showKeyboardAccess" type="button">Use keyboard to set date ?</button>
+    <app-keyboard-access (setDate)="setDate('date', $event)" *ngIf="showKeyboardAccess" [allMonths]="allMonths"
+                         [currentDay]="currentDay" [currentMonth]="currentMonth"
                          [currentYear]="currentYear" [numberOfDayInMonth]="numberOfDayInMonth"></app-keyboard-access>
   </div>
   <div>
-      <app-day [currentDayNbr]="currentDay" [currentDayName]="currentDayName"></app-day>
-      <app-calendar-event [events]="events?.result" [currentDate]="currentDate"
-                          (deleteCalendarEvent)="deleteEvent($event)"
-                          ></app-calendar-event>
-      <app-add-event *ngIf="!loadingEvent" (addCalendarEvent)="addEvent($event)"></app-add-event>
+      <app-day [currentDayName]="currentDayName" [currentDayNbr]="currentDay"></app-day>
+      <app-calendar-event (deleteCalendarEvent)="deleteEvent($event)" [currentDate]="currentDate"
+                          [events]="events?.result"></app-calendar-event>
+      <app-add-event (addCalendarEvent)="addEvent($event)" *ngIf="!loadingEvent"></app-add-event>
       <div *ngIf="loadingEvent">
         Posting Event...
       </div>
     </div>
    <div>
-     <app-year [currentYear]="currentYear"
-               (setYear)="setDate('year', $event)"></app-year>
-     <app-months [currentMonth]="currentMonth"
+     <app-year (setYear)="setDate('year', $event)"
+               [currentYear]="currentYear"></app-year>
+     <app-months (setMonth)="setDate('month', $event)"
                  [allMonths]="allMonths"
-                 (setMonth)="setDate('month', $event)"></app-months>
-     <app-days [weekDayShort]="weekDayShort"
+                 [currentMonth]="currentMonth"></app-months>
+     <app-days (setDay)="setDate('date', $event)"
                [currentDay]="currentDay"
                [currentMonth]="currentMonth"
                [rows]="rows"
-               (setDay)="setDate('date', $event)"></app-days>
+               [weekDayShort]="weekDayShort"></app-days>
    </div>
 </div>
 

@@ -1,4 +1,4 @@
-<form action="" method="post" (ngSubmit)="postEvent()">
+<form (ngSubmit)="postEvent()" method="post">
   <label>
     <input #eventTitleInput="ngModel" [(ngModel)]="eventText" name="calendar-event" placeholder="Create an Event"
            type="text">

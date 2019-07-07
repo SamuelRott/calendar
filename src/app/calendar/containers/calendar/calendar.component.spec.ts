@@ -8,7 +8,8 @@ import {YearComponent} from '../../components/year/year.component';
 import {CalendarEventComponent} from '../../components/calendar-event/calendar-event.component';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {AddEventComponent} from '../../components/add-event/add-event.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {KeyboardAccessComponent} from '../../components/keyboard-access/keyboard-access.component';
 
 describe('CalendarComponent', () => {
   let component: CalendarComponent;
@@ -18,6 +19,7 @@ describe('CalendarComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
+        ReactiveFormsModule,
         FormsModule
       ],
       declarations: [
@@ -27,7 +29,8 @@ describe('CalendarComponent', () => {
         DayComponent,
         YearComponent,
         CalendarEventComponent,
-        AddEventComponent
+        AddEventComponent,
+        KeyboardAccessComponent
       ]
     })
     .compileComponents();

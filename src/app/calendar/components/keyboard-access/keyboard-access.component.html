@@ -2,7 +2,7 @@
   <form (ngSubmit)="changeDate()" [formGroup]="date">
     <label >
       day
-      <input type="number" formControlName="day" min="1" [max]="numberOfDayInMonth">
+      <input [max]="numberOfDayInMonth" formControlName="day" min="1" type="number">
     </label>
     <label>
       month
