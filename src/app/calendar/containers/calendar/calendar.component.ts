@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as moment from 'moment';
 import { setMomentDate } from './calendar.enum';
 import { DaysService } from '../../services/days.service';
@@ -85,7 +85,7 @@ export class CalendarComponent implements OnInit {
     let cells = [];
 
     totalSlots.forEach((day, i) => {
-      if (i % 7 !== 0) {
+      if (i === 0 || i % 7 !== 0) {
         cells.push(day);
       } else {
         this.rows.push(cells);

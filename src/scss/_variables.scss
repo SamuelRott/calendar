@@ -1,11 +1,30 @@
-
-$calendar-red: rgb(235 54 79);
-$calendar-lilla: rgb(80 27 223);
-
+/* Color */
 $white: rgb(255 255 255);
 $lighter-gray: rgb(222 222 222);
 $light-gray: rgb(156 156 156);
 $gray: rgb(99 99 99);
 $black: rgb(43 42 46);
 
+$calendar-red: rgb(235 54 79);
+$calendar-lilla: rgb(80 27 223);
 
+/* Spacing */
+$unit: 8px;
+
+$extra-huge-spacing: $unit * 8;
+$huge-spacing: $unit * 6;
+$extra-large-spacing: $unit * 4;
+$large-spacing: $unit * 3;
+$spacing: $unit * 2;
+$small-spacing: $unit;
+$tiny-spacing: $unit * 0.5;
+
+/* shadow */
+$box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+
+/* Layout */
+
+$calendar-width: 420px;
+$calendar-padding: $large-spacing;
+$current-day-width: 250px;
+$event-list-max-height: 200px;

@@ -1,8 +1,14 @@
-.calendar {
+@import 'variables';
+
+
+.wrapper {
   display: flex;
   overflow: hidden;
   position: relative;
-  padding-top: 40px;
+  padding-top: $huge-spacing;
+  background-color: $white;
+  box-shadow: $box-shadow;
+  border-radius: 3%;
 }
 
 .keyboard-access {
@@ -15,4 +21,19 @@
   &.is-active {
     transform: translateY(0);
   }
+}
+
+.current-day {
+  width: $current-day-width;
+  max-width: $current-day-width;
+  padding: $large-spacing;
+  color: $white;
+  background-color: $calendar-red;
+}
+
+.calendar {
+
+
+  width: $calendar-width;
+  padding: $large-spacing;
 }

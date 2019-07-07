@@ -1,11 +1,11 @@
-<div class="calendar">
+<div class="wrapper">
   <div class="keyboard-access" [class.is-active]="keyboardAccess">
     <button *ngIf="!showKeyboardAccess" type="button">Use keyboard to set date ?</button>
     <app-keyboard-access (setDate)="setDate('date', $event)" *ngIf="showKeyboardAccess" [allMonths]="allMonths"
                          [currentDay]="currentDay" [currentMonth]="currentMonth"
                          [currentYear]="currentYear" [numberOfDayInMonth]="numberOfDayInMonth"></app-keyboard-access>
   </div>
-  <div>
+  <div class="current-day">
       <app-day [currentDayName]="currentDayName" [currentDayNbr]="currentDay"></app-day>
       <app-calendar-event (deleteCalendarEvent)="deleteEvent($event)" [currentDate]="currentDate"
                           [events]="events?.result"></app-calendar-event>
@@ -13,8 +13,8 @@
       <div *ngIf="loadingEvent">
         Posting Event...
       </div>
-    </div>
-   <div>
+   </div>
+   <div class="calendar">
      <app-year (setYear)="setDate('year', $event)"
                [currentYear]="currentYear"></app-year>
      <app-months (setMonth)="setDate('month', $event)"
