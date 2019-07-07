@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-add-event',
@@ -10,8 +10,8 @@ export class AddEventComponent {
   @Output()
   addCalendarEvent = new EventEmitter<string>();
 
-  eventText = new FormControl('');
-  // TODO refactor to disable posting on load
+  eventText = new FormControl('', [Validators.required]);
+
   postEvent(): void {
     this.addCalendarEvent.emit(this.eventText.value);
     this.eventText.reset();
