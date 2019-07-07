@@ -2,7 +2,7 @@
   <div *ngIf="currentEvents && currentEvents.length > 0">
     <span>Current Events</span>
     <ul class="event-list">
-      <li  *ngFor="let event of currentEvents">
+      <li class="event" *ngFor="let event of currentEvents">
         <span>{{event.text}}</span>
         <button (click)="deleteCalendarEvent.emit(event)" [disabled]="loadingEvent" title="delete this event">X</button>
       </li>

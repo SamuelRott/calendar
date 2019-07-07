@@ -1,5 +1,7 @@
 <div class="wrapper">
-  <form (ngSubmit)="changeDate()" [formGroup]="date">
+  <button *ngIf="!showKeyboardAccess" class="question" type="button">Use keyboard to set date ?</button>
+
+  <form (ngSubmit)="changeDate()" *ngIf="showKeyboardAccess" [formGroup]="date">
     <label >
       day
       <input [max]="numberOfDayInMonth" formControlName="day" min="1" type="number">

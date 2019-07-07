@@ -33,6 +33,9 @@ export class KeyboardAccessComponent {
   }
 
   @Input()
+  showKeyboardAccess: boolean;
+
+  @Input()
   numberOfDayInMonth: number;
 
   @Input()

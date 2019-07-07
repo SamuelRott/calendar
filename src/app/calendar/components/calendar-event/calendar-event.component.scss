@@ -4,7 +4,46 @@
   flex-grow: 1;
 }
 .event-list {
+  list-style: none;
   max-height: $event-list-max-height;
   overflow-y: auto;
   overflow-x: hidden;
+  margin: $small-spacing 0;
+  padding-left: $small-spacing;
+}
+
+.event {
+  $button-size: 24px;
+
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: $small-spacing;
+
+  span {
+    width: calc(100% - #{$button-size});
+  }
+
+  button {
+    width: $button-size;
+    height: $button-size;
+    background-color: inherit;
+    color: inherit;
+    font-weight: bold;
+    font-size: 14px;
+    border: 1px solid $white;
+    border-radius: 50% ;
+  }
+
+ &::before {
+   content: '';
+   display: block;
+   width: 4px;
+   height: 4px;
+   background-color: $white;
+   border-radius: 50%;
+   position: absolute;
+   top: $small-spacing;
+   left: -$small-spacing;
+ }
 }
