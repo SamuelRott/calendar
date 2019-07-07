@@ -1,0 +1,19 @@
+<div>
+  <form (ngSubmit)="changeDate()" [formGroup]="date">
+    <label >
+      year
+      <input type="number" formControlName="year">
+    </label>
+    <label>
+      month
+      <select  id=""  formControlName="month" >
+        <option *ngFor="let month of allMonths" [value]="month">{{month}}</option>
+      </select>
+    </label>
+    <label >
+      day
+      <input type="number" formControlName="day" min="1" [max]="numberOfDayInMonth">
+    </label>
+    <button type="submit">submit</button>
+  </form>
+</div>

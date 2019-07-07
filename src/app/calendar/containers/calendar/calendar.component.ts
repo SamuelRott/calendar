@@ -16,6 +16,7 @@ export class CalendarComponent implements OnInit {
   currentMonth: string;
   currentYear: string;
   currentDate: string;
+  numberOfDayInMonth: number;
   events: StoredEvents;
   loadingEvent: boolean;
   rows: SelectedDay[][];
@@ -59,11 +60,13 @@ export class CalendarComponent implements OnInit {
   }
 
   setCalendar(): void {
-    this.currentDay = this.dateObj.format('D');
     this.currentDayName = this.dateObj.format('dddd');
     this.currentMonth = this.dateObj.format('MMM');
     this.currentYear = this.dateObj.format('YYYY');
     this.currentDate =  this.dateObj.format('YYYY-MMM-D');
+    this.numberOfDayInMonth = Number(this.dateObj.daysInMonth());
+    this.currentDay = this.dateObj.format('D');
+
     this.setDaysInCalendar();
   }
 
@@ -111,5 +114,12 @@ export class CalendarComponent implements OnInit {
       }
     }
     this.setCalendar();
+  }
+
+  goToDate() {
+    // this.dateObj = moment(this.dateObj)
+    //   .set(setMomentDate.year, options.year)
+    //   .set(setMomentDate.month, options.month)
+    //   .set(setMomentDate.date, options.day);
   }
 }
