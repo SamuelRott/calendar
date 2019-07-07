@@ -1,8 +1,6 @@
-<form (ngSubmit)="postEvent()" method="post">
-  <label>
-    <input [formControl]="eventText" name="calendar-event" placeholder="Create an Event"
+<form (ngSubmit)="postEvent()" class="wrapper" method="post">
+  <input [formControl]="eventText" name="calendar-event" placeholder="Create an Event"
            type="text">
-  </label>
   <button [disabled]="!eventText.value"
           [title]="eventText.value ? 'post an event' : 'add a title to post an event'"
           type="submit">+</button>

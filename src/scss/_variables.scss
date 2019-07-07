@@ -10,7 +10,6 @@ $calendar-lilla: rgb(80 27 223);
 
 /* Spacing */
 $unit: 8px;
-
 $extra-huge-spacing: $unit * 8;
 $huge-spacing: $unit * 6;
 $extra-large-spacing: $unit * 4;
@@ -23,8 +22,8 @@ $tiny-spacing: $unit * 0.5;
 $box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
 
 /* Layout */
-
 $calendar-width: 420px;
 $calendar-padding: $large-spacing;
 $current-day-width: 250px;
 $event-list-max-height: 100px;
+$button-size: 24px;

@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 :host {
   flex-grow: 1;
@@ -13,7 +14,7 @@
 }
 
 .event {
-  $button-size: 24px;
+
 
   position: relative;
   display: flex;
@@ -25,14 +26,7 @@
   }
 
   button {
-    width: $button-size;
-    height: $button-size;
-    background-color: inherit;
-    color: inherit;
-    font-weight: bold;
-    font-size: 14px;
-    border: 1px solid $white;
-    border-radius: 50% ;
+    @include calendar-button;
   }
 
  &::before {
