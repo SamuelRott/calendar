@@ -22,6 +22,7 @@ export class CalendarComponent implements OnInit {
   events: StoredEvents;
   loadingEvent: boolean;
   keyboardAccess: boolean;
+  showKeyboardAccess: boolean;
 
   readonly weekDayShort: string[] = moment.weekdaysShort();
   readonly  allMonths: string[] = moment.monthsShort();
@@ -32,12 +33,7 @@ export class CalendarComponent implements OnInit {
     this.dateObj = moment();
     this.setCalendar();
     this.loadEvents();
-
-    fromEvent(document, 'keyup').subscribe((event: any) => {
-      if (event.key === 'Tab') {
-        this.keyboardAccess = true;
-      }
-    });
+    this.initKeyboardAccess();
   }
 
   loadEvents() {
@@ -122,5 +118,21 @@ export class CalendarComponent implements OnInit {
       }
     }
     this.setCalendar();
+  }
+
+  initKeyboardAccess() {
+    let ignored;
+    fromEvent(document, 'keyup').subscribe((event: any) => {
+      if (this.keyboardAccess && event.key === 'Enter') {
+        this.showKeyboardAccess = true;
+      } else if (
+        !this.showKeyboardAccess
+        && this.keyboardAccess ) {
+        this.keyboardAccess = false;
+        ignored = true;
+      } else if (!ignored && event.key === 'Tab') {
+        this.keyboardAccess = true;
+      }
+    });
   }
 }
