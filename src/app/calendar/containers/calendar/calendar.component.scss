@@ -5,7 +5,8 @@
   display: flex;
   overflow: hidden;
   position: relative;
-  min-height: 430px;
+  // TODO refactor with set amount of cell
+  min-height: 440px;
   background-color: $white;
   box-shadow: $box-shadow;
   border-radius: 3%;

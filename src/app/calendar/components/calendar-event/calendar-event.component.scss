@@ -4,6 +4,17 @@
 :host {
   flex-grow: 1;
 }
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.list-wrapper {
+  flex-grow: 1;
+}
+
 .event-list {
   list-style: none;
   max-height: $event-list-max-height;
@@ -14,8 +25,6 @@
 }
 
 .event {
-
-
   position: relative;
   display: flex;
   justify-content: space-between;

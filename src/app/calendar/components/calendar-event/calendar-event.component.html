@@ -1,5 +1,5 @@
-<div>
-  <div *ngIf="currentEvents && currentEvents.length > 0">
+<div class="wrapper">
+  <div class="list-wrapper" *ngIf="currentEvents && currentEvents.length > 0">
     <span>Current Events</span>
     <ul class="event-list">
       <li class="event" *ngFor="let event of currentEvents">
@@ -9,7 +9,7 @@
     </ul>
   </div>
   <div *ngIf="currentEvents && currentEvents.length === 0">
-    <span>No event for the day.</span>
+    No event for the day.
   </div>
   <div *ngIf="!currentEvents">
     Loading...

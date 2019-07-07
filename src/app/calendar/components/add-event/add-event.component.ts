@@ -11,7 +11,7 @@ export class AddEventComponent {
   addCalendarEvent = new EventEmitter<string>();
 
   eventText = new FormControl('');
-
+  // TODO refactor to disable posting on load
   postEvent(): void {
     this.addCalendarEvent.emit(this.eventText.value);
     this.eventText.reset();
