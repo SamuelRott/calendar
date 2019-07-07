@@ -1,3 +1,16 @@
-.current-month {
-  font-weight: bold;
+@import 'variables';
+
+.wrapper {
+ display: flex;
 }
+.month {
+  font-size: 12px;
+  color: $light-gray;
+  width: calc(100% / 12);
+
+  &.current-month {
+    color: $black;
+    font-weight: bold;
+  }
+}
+

@@ -1,17 +1,20 @@
-<table class="calendar-day">
+<table class="calendar-days-table">
   <thead>
   <tr>
-    <th *ngFor="let dayShort of weekDayShort">
+    <th class="table-column"  *ngFor="let dayShort of weekDayShort">
       {{dayShort | uppercase}}
     </th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let week of rows">
-    <td (click)="setDay.emit(day)"
-        *ngFor="let day of week"
-        [class.current-day]="currentDay === day.day"
-        [class.has-event]="day.event">{{day.day}}</td>
+  <tr class="table-row" *ngFor="let week of rows">
+    <td (click)="setDay.emit(day)" *ngFor="let day of week"
+        [ngClass]="{
+          'table-cell': true,
+          'is-not-current-month': currentMonth !== day.month,
+          'is-currently-selected': currentDay === day.day && currentMonth === day.month,
+          'has-event':day.event
+          }"><span>{{day.day}}</span></td>
   </tr>
   </tbody>
 </table>

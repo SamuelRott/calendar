@@ -1,8 +1,60 @@
-.current-day {
-  border: 1px solid red;
-}
+@import 'variables';
 
-.has-event {
-  background-color: green;
-}
+$table-width: $calendar-width - ($calendar-padding * 2);
+$cell-size: $table-width / 7;
 
+.calendar-days-table {
+  width: $table-width;
+
+  .table-column {
+    width: calc(100% /7)
+  }
+
+  .table-row {
+    height: $cell-size - 2; // - 2 round calculation
+  }
+
+  .table-cell {
+    text-align: center;
+    position: relative;
+
+    span {
+      width: 63%;
+      height: 63%;
+      position: absolute;
+      top: 50%;
+      right: 50%;
+      transform: translate(50%, -50%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &.is-not-current-month {
+      color: $light-gray;
+    }
+
+    &.is-currently-selected {
+      span {
+        color: $white;
+        font-weight: bold;
+        background-color: $calendar-red;
+        border-radius: 50%;
+      }
+    }
+
+    &.has-event {
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        right: $tiny-spacing;
+        top: $tiny-spacing;
+        border-radius: 50%;
+        background-color: $calendar-lilla;
+        width: 6px;
+        height: 6px;
+      }
+    }
+  }
+}
