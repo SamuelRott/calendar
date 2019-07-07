@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
@@ -6,18 +6,31 @@ import {FormControl, FormGroup} from '@angular/forms';
   templateUrl: './keyboard-access.component.html',
   styleUrls: ['./keyboard-access.component.scss']
 })
-export class KeyboardAccessComponent implements AfterViewInit {
+export class KeyboardAccessComponent {
+  private _currentDay: string;
+  private _currentMonth: string;
+  private _currentYear: string;
+
   @Output()
   setDate = new EventEmitter<SelectedDay>();
 
   @Input()
-  currentDay: string;
+  set currentDay(value: string) {
+    this._currentDay = value;
+    this.updateForm();
+  }
 
   @Input()
-  currentYear: string;
+  set currentMonth(value: string) {
+    this._currentMonth = value;
+    this.updateForm();
+  }
 
   @Input()
-  currentMonth: string;
+  set currentYear(value: string) {
+    this._currentYear = value;
+    this.updateForm();
+  }
 
   @Input()
   numberOfDayInMonth: number;
@@ -31,15 +44,15 @@ export class KeyboardAccessComponent implements AfterViewInit {
     day: new FormControl(''),
   });
 
-  ngAfterViewInit() {
-    this.date.setValue({
-      year: this.currentYear,
-      month: this.currentMonth,
-      day: this.currentDay
-    });
-  }
-
   changeDate() {
     this.setDate.emit(this.date.value);
+  }
+
+  private updateForm() {
+    this.date.patchValue({
+      year: this._currentYear,
+      month: this._currentMonth,
+      day: this._currentDay
+    });
   }
 }
