@@ -41,7 +41,6 @@ export class KeyboardAccessComponent {
   @Input()
   allMonths: string[];
 
-  // TODO validate form
   date = new FormGroup({
     year: new FormControl('',
     [
