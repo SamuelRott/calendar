@@ -37,9 +37,12 @@ export class DaysService {
     return startingBlankDays;
   }
 
-  static endingBlankDaysInMonth(allMonths, lastDayOfMonth, currentMonthIndex, currentYear): SelectedDay[] {
+  static fillCalendar(allMonths, currentMonthIndex, currentYear, firstDayOfMonth, numberOfDayInMonth): SelectedDay[] {
+    const cellNumber = 42;
     let nextMonthIndex;
     let year;
+
+    const fillingDays = cellNumber - ( Number(firstDayOfMonth) + numberOfDayInMonth);
 
     if (currentMonthIndex + 1 <= allMonths.length - 1  ) {
       year = currentYear;
@@ -51,7 +54,7 @@ export class DaysService {
     const nextMonth = allMonths[nextMonthIndex];
 
     const endingBlankDays = [];
-    for (let d = 1; d < lastDayOfMonth; d++) {
+    for (let d = 1; d <= fillingDays; d++) {
       endingBlankDays.push({day: d.toString(), month: nextMonth, year: year.toString()});
     }
     return  endingBlankDays;
@@ -62,7 +65,7 @@ export class DaysService {
   static addEvent(days: SelectedDay[], events: CalendarEvent[] = []) {
 
     const key = 'date';
-    const CalendarEventHash = events.reduce((obj, item) => {
+    const calendarEventHash = events.reduce((obj, item) => {
       obj[item[key]] = item;
       return obj;
     }, {});
@@ -71,7 +74,7 @@ export class DaysService {
       const dayDate = `${day.year}-${day.month}-${day.day}`;
       return {
         ...day,
-        event: !!CalendarEventHash[dayDate]
+        event: !!calendarEventHash[dayDate]
       };
     });
   }
@@ -82,12 +85,11 @@ export class DaysService {
     const currentYear: string = dateObj.format('YYYY');
     const numberOfDayInMonth: number = Number(dateObj.daysInMonth());
     const firstDayOfMonth: string =  moment(dateObj).startOf(setMomentDate.month).format('d');
-    const lastDayOfMonth: string = moment(dateObj).endOf(setMomentDate.month).format('d');
 
     return DaysService.addEvent([
       ...DaysService.startingBlankDaysInMonth(allMonths, firstDayOfMonth, currentMonthIndex, currentYear),
       ...DaysService.daysInMonth(numberOfDayInMonth, currentMonth, currentYear),
-      ...DaysService.endingBlankDaysInMonth(allMonths, lastDayOfMonth, currentMonthIndex, currentYear)
+      ...DaysService.fillCalendar(allMonths, currentMonthIndex, currentYear, firstDayOfMonth, numberOfDayInMonth)
     ], events);
   }
 }
