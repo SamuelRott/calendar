@@ -1,12 +1,20 @@
 @import 'variables';
 
 .wrapper {
- display: flex;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0 $small-spacing;
+  padding-bottom: $tiny-spacing;
+  border-bottom: 1px solid $lighter-gray;
 }
 .month {
   font-size: 12px;
   color: $light-gray;
-  width: calc(100% / 12);
+  flex-grow: 1;
+
+  &:hover {
+    cursor: pointer;
+  }
 
   &.current-month {
     color: $black;
