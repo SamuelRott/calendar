@@ -7,14 +7,14 @@
   </tr>
   </thead>
   <tbody>
-  <tr class="table-row" *ngFor="let week of rows">
-    <td (click)="setDay.emit(day)" *ngFor="let day of week"
-        [ngClass]="{
-          'table-cell': true,
-          'is-not-current-month': currentMonth !== day.month,
-          'is-currently-selected': currentDay === day.day && currentMonth === day.month,
-          'has-event':day.event
-          }"><span>{{day.day}}</span></td>
-  </tr>
+    <tr class="table-row" *ngFor="let week of rows">
+      <td (click)="setDay.emit(day)" *ngFor="let day of week"
+          [ngClass]="{
+            'table-cell': true,
+            'is-not-current-month': currentMonth !== day.month,
+            'is-currently-selected': currentDay === day.day && currentMonth === day.month,
+            'has-event':day.event
+            }"><span class="number">{{day.day}}</span></td>
+    </tr>
   </tbody>
 </table>

@@ -13,13 +13,21 @@ $cell-size: $table-width / 7;
 
   .table-row {
     height: $cell-size - 2; // - 2 round calculation
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .table-cell {
     text-align: center;
     position: relative;
 
-    span {
+    &:hover {
+      cursor: pointer;
+    }
+
+    .number {
       width: 63%;
       height: 63%;
       position: absolute;
@@ -36,7 +44,7 @@ $cell-size: $table-width / 7;
     }
 
     &.is-currently-selected {
-      span {
+      .number {
         color: $white;
         font-weight: bold;
         background-color: $calendar-red;
