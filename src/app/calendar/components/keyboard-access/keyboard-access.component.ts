@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-keyboard-access',
@@ -43,9 +43,22 @@ export class KeyboardAccessComponent {
 
   // TODO validate form
   date = new FormGroup({
-    year: new FormControl(''),
-    month: new FormControl(''),
-    day: new FormControl(''),
+    year: new FormControl('',
+    [
+      Validators.required,
+      Validators.min(-9999),
+      Validators.max(9999)
+    ]),
+    month: new FormControl('',
+    [
+      Validators.required,
+    ]),
+    day: new FormControl('',
+    [
+      Validators.required,
+      Validators.min(-99),
+      Validators.max(99)
+    ]),
   });
 
   changeDate() {

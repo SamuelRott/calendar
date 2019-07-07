@@ -10,7 +10,7 @@
   border-radius: 3%;
 
   &.keyboard-access-open {
-    padding-top: $huge-spacing;
+    padding-top: $extra-huge-spacing;
   }
 }
 
@@ -19,7 +19,7 @@
   width: 100%;
   justify-content: center;
   position: absolute;
-  height: $huge-spacing;
+  height: $extra-huge-spacing;
   top: 0;
   transform: translateY(-100px);
 
@@ -40,8 +40,6 @@
 }
 
 .calendar {
-
-
   width: $calendar-width;
   padding: $large-spacing;
 }

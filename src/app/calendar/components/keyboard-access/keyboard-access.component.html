@@ -1,21 +1,24 @@
 <div class="wrapper">
   <button *ngIf="!showKeyboardAccess" type="button">Use keyboard to set date ?</button>
+  <ng-container *ngIf="showKeyboardAccess">
+    <form (ngSubmit)="changeDate()" [formGroup]="date">
+      <label >
+        day
+        <input [max]="numberOfDayInMonth" formControlName="day" min="1" type="number">
+      </label>
+      <label>
+        month
+        <select formControlName="month">
+          <option *ngFor="let month of allMonths" [value]="month">{{month}}</option>
+        </select>
+      </label>
+      <label >
+        year
+        <input max="9999" min="-9999" type="number" formControlName="year">
+      </label>
+      <button type="submit" [disabled]="date.invalid">submit</button>
+    </form>
+    <span *ngIf="date.invalid">Please set the date to something like 17 Nov 2015</span>
+  </ng-container>
 
-  <form (ngSubmit)="changeDate()" *ngIf="showKeyboardAccess" [formGroup]="date">
-    <label >
-      day
-      <input [max]="numberOfDayInMonth" formControlName="day" min="1" type="number">
-    </label>
-    <label>
-      month
-      <select formControlName="month" >
-        <option *ngFor="let month of allMonths" [value]="month">{{month}}</option>
-      </select>
-    </label>
-    <label >
-      year
-      <input max="9999" min="-9999" type="number" formControlName="year">
-    </label>
-    <button type="submit">submit</button>
-  </form>
 </div>
