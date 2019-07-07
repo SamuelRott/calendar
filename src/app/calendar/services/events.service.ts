@@ -12,7 +12,7 @@ export class EventsService {
   private url = 'https://www.jsonstore.io/be6ee87ce7f2001579cfe86d69f0199f77df9fed385dbe21b77d7ca2c31391cb';
 
   constructor(private http: HttpClient) {}
-  // TODO handle error
+
   getEvents(): Observable<StoredEvents> {
     return this.http.get<StoredEvents>(this.url).pipe(
       map((storedEvents) => this.events = storedEvents)
