@@ -1,6 +1,6 @@
 <div class="wrapper">
   <div class="list-wrapper" *ngIf="currentEvents && currentEvents.length > 0">
-    <span>Current Events</span>
+    <span class="event-list-title">Current Events</span>
     <ul class="event-list">
       <li class="event" *ngFor="let event of currentEvents">
         <span>{{event.text}}</span>

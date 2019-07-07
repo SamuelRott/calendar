@@ -13,6 +13,12 @@
 
 .list-wrapper {
   flex-grow: 1;
+  height: 100%;
+  margin-top: $spacing;
+}
+
+.event-list-title {
+  font-weight: bold;
 }
 
 .event-list {
