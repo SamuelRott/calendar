@@ -1,0 +1,7 @@
+@import 'variables';
+
+.event-list {
+  max-height: $event-list-max-height;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
