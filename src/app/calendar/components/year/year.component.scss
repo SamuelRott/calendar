@@ -1,0 +1,13 @@
+@import 'variables';
+
+.wrapper {
+  display: flex;
+  justify-content: flex-end;
+  color: $lighter-gray;
+  font-weight: bold;
+  margin-bottom: $small-spacing;
+
+  button {
+    color: inherit;
+  }
+}
