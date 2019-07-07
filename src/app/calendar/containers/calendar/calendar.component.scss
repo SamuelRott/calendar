@@ -5,16 +5,27 @@
   display: flex;
   overflow: hidden;
   position: relative;
-  padding-top: $huge-spacing;
+
   background-color: $white;
   box-shadow: $box-shadow;
   border-radius: 3%;
+
+  &.keyboard-access-open {
+    padding-top: $huge-spacing;
+
+    .question {
+      border: 0;
+    }
+  }
 }
 
 .keyboard-access {
+  display: flex;
+  width: 100%;
+  justify-content: center;
   position: absolute;
+  height: $huge-spacing;
   top: 0;
-  width: 400px;
   transform: translateY(-100px);
 
 

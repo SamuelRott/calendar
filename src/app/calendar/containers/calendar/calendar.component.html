@@ -1,6 +1,6 @@
-<div class="wrapper">
+<div class="wrapper" [class.keyboard-access-open]="keyboardAccess">
   <div class="keyboard-access" [class.is-active]="keyboardAccess">
-    <button *ngIf="!showKeyboardAccess" type="button">Use keyboard to set date ?</button>
+    <button *ngIf="!showKeyboardAccess" class="question" type="button">Use keyboard to set date ?</button>
     <app-keyboard-access (setDate)="setDate('date', $event)" *ngIf="showKeyboardAccess" [allMonths]="allMonths"
                          [currentDay]="currentDay" [currentMonth]="currentMonth"
                          [currentYear]="currentYear" [numberOfDayInMonth]="numberOfDayInMonth"></app-keyboard-access>
