@@ -8,4 +8,9 @@
   font-weight: bold;
   border: 1px solid $white;
   border-radius: 50% ;
+
+  &[disabled] {
+    color: $light-gray;
+    border-color: $light-gray;
+  }
 }
