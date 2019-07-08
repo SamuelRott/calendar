@@ -26,7 +26,7 @@ Calendar built with angular for framework and momentJS for time handling.
   
    Additional feature:
    
-   - [x] Accessibility / Add easy keyboard control. To trigger press Tab then Enter;
+  - [x] Accessibility / Add easy keyboard control. To trigger press Tab then Enter;
 
 ## Development server
 
