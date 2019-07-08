@@ -16,7 +16,7 @@
         year
         <input max="9999" min="-9999" type="number" formControlName="year">
       </label>
-      <button type="submit" [disabled]="date.invalid">submit</button>
+      <button type="submit" [disabled]="date.invalid">go to date</button>
     </form>
     <span *ngIf="date.invalid">Please set the date to something like 17 Nov 2015</span>
   </ng-container>
