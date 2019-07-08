@@ -63,7 +63,6 @@ export class DaysService {
 
 
   static addEvent(days: SelectedDay[], events: CalendarEvent[] = []) {
-
     const key = 'date';
     const calendarEventHash = events.reduce((obj, item) => {
       obj[item[key]] = item;
