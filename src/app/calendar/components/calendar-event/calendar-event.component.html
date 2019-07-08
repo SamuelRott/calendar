@@ -8,10 +8,10 @@
       </li>
     </ul>
   </div>
-  <div *ngIf="currentEvents && currentEvents.length === 0">
+  <div *ngIf="!loadingEvent && currentEvents && currentEvents.length === 0">
     No event for the day.
   </div>
-  <div *ngIf="!currentEvents">
+  <div *ngIf="loadingEvent && !currentEvents">
     Loading...
   </div>
 </div>

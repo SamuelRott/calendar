@@ -19,7 +19,7 @@ export class CalendarComponent implements OnInit {
   currentDate: string;
   numberOfDayInMonth: number;
   rows: SelectedDay[][];
-  events: StoredEvents;
+  events: CalendarEvent[];
   loadingEvent: boolean;
   keyboardAccess: boolean;
   showKeyboardAccess: boolean;
@@ -76,12 +76,7 @@ export class CalendarComponent implements OnInit {
   }
 
   setDaysInCalendar(): void {
-    let events = [];
-    if (this.events && this.events.result && this.events.ok) {
-      events = this.events.result;
-    }
-
-    const totalSlots: SelectedDay[] = DaysService.daysInCalendar(this.dateObj, this.allMonths, events);
+    const totalSlots: SelectedDay[] = DaysService.daysInCalendar(this.dateObj, this.allMonths, this.events);
     this.rows = [];
     let cells = [];
 

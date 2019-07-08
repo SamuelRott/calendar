@@ -7,7 +7,7 @@
   <div class="current-day">
       <app-day [currentDayName]="currentDayName" [currentDayNbr]="currentDay"></app-day>
       <app-calendar-event (deleteCalendarEvent)="deleteEvent($event)" [loadingEvent]="loadingEvent" [currentDate]="currentDate"
-                          [events]="events?.result"></app-calendar-event>
+                          [events]="events"></app-calendar-event>
       <app-add-event (addCalendarEvent)="addEvent($event)" *ngIf="!loadingEvent"></app-add-event>
       <div *ngIf="loadingEvent">
         Posting Event...

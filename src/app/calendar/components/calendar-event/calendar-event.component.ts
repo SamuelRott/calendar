@@ -15,7 +15,7 @@ export class CalendarEventComponent {
   deleteCalendarEvent = new EventEmitter<CalendarEvent>();
 
   @Input()
-  loadingEvent: boolean
+  loadingEvent: boolean;
 
   @Input()
   set events(value: CalendarEvent[]) {

@@ -16,7 +16,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
-        console.error(error);
         console.error(`App request failed with message "${error.message}"`);
         return EMPTY;
       })

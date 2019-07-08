@@ -7,28 +7,27 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class EventsService {
-  private events: StoredEvents;
+  private events: CalendarEvent[];
 
-  private url = 'https://www.jsonstore.io/be6ee87ce7f2001579cfe86d69f0199f77df9fed385dbe21b77d7ca2c31391cb';
+  private url = 'https://www.jsonstore.io/08c85d6884b1b37b2b01f2505a0b8a2e759bacd02991f78b580443dc145d8396';
 
   constructor(private http: HttpClient) {}
 
-  getEvents(): Observable<StoredEvents> {
+  getEvents(): Observable<CalendarEvent[]> {
     return this.http.get<StoredEvents>(this.url).pipe(
-      map((storedEvents) => this.events = storedEvents)
+      map((storedEvents) => {
+        return this.events = storedEvents.result ? storedEvents.result : [];
+      })
     );
   }
 
   deleteEvent(event: CalendarEvent): Observable<any> {
-    const updatedEvents = this.events.result.filter((item) => event.id !== item.id);
+    const updatedEvents = this.events.filter((item) => event.id !== item.id);
     return this.http.post<any>(this.url, updatedEvents).pipe();
   }
 
   addEvent(event: CalendarEvent): Observable<any> {
-    if (!this.events.result) {
-      this.events.result = [];
-    }
-    this.events.result.push(event);
-    return this.http.post<any>(this.url, this.events.result);
+    this.events.push(event);
+    return this.http.post<any>(this.url, this.events);
   }
 }
